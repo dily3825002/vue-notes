@@ -1,0 +1,31 @@
+<html>
+<head>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+
+<div id="app">
+  <router-view></router-view>
+</div>
+
+<script>
+const User = {
+  props: ['id'],
+  template: '<div>User {{ id }}</div>'
+}
+const router = new VueRouter({
+  routes: [
+    { path: '/user/:id', component: User, props: true 
+    }
+  ]
+})
+
+const app = new Vue({
+  router
+}).$mount('#app')
+
+</script>
+
+</body>
+</html>
