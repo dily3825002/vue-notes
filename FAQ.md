@@ -1,14 +1,9 @@
-template
+### FAQ
 
-
-computed
-
-
-mapState
-
-
-mapMutations
-
+* template
+* computed
+* mapState
+* mapMutations
 
 ### 解构赋值
 
@@ -53,4 +48,33 @@ let b = { a : a };
 * Mutations
     * mapMutations：将组件中的 methods 映射为 this.$store.commit
     * 这样映射后就不用调用 this.$store.commit('increment')了
-* 
+
+### 项目结构
+
+```
+├── index.html
+├── main.js
+├── api
+│   └── ... # 抽取出API请求
+├── components
+│   ├── App.vue
+│   └── ...
+└── store
+    ├── index.js          # 我们组装模块并导出 store 的地方
+    ├── actions.js        # 根级别的 action
+    ├── mutations.js      # 根级别的 mutation
+    └── modules
+        ├── cart.js       # 购物车模块
+        └── products.js   # 产品模块
+```        
+
+### 严格模式
+
+需要打开
+
+```
+const store = new Vuex.Store({
+  // ...
+  strict: true
+})
+```
