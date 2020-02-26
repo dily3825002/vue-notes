@@ -1,0 +1,60 @@
+<html>
+<head>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vuex"></script>
+<script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+
+<div id="app">
+  <Counter></Counter>
+</div>
+  
+<script>
+
+Vue.use(Vuex)
+
+const Counter = {
+  template: `<div>{{ this.$store.getters.doneTodos[0].text }}</div>`,
+  computed: Vuex.mapState({
+    // 箭头函数可使代码更简练
+    count: state => state.count + 1,
+
+    // 传字符串参数 'count' 等同于 `state => state.count`
+    countAlias: 'count',
+
+    // 为了能够使用 `this` 获取局部状态，必须使用常规函数
+    countPlusLocalState (state) {
+      return state.count + 2
+    }
+  })
+}
+
+const store = new Vuex.Store({
+  state: {
+    todos: [
+      { id: 1, text: 'I am the one', done: true },
+      { id: 2, text: 'I am the two', done: false }
+    ]
+  },
+  getters: {
+    doneTodos: state => {
+      return state.todos.filter(todo => todo.done)
+    }
+  }
+})
+
+const app = new Vue({
+  el: '#app',
+  // 把 store 对象提供给 “store” 选项，这可以把 store 的实例注入所有的子组件
+  store,
+  components: { Counter }
+})
+
+
+</script>
+
+<!-- mapGetters 辅助函数仅仅是将 store 中的 getter 映射到局部计算属性 -->
+
+</body>
+</html>
